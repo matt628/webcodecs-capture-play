@@ -57,7 +57,7 @@ class CicularAudioSharedBuffer {
             this.sharedAudiobuffers.push(new SharedArrayBuffer(numSamples * Float32Array.BYTES_PER_ELEMENT));
         }
 
-        this.contextFrequency = contextFrequency;
+        this.contextFrequency = 48000;
         this.lastTimestamp = -1;
 
         this.size = numSamples;
@@ -76,7 +76,7 @@ class CicularAudioSharedBuffer {
             throw `Channels diffent than expected, expected ${this.sharedAudiobuffers.length}, passed: ${aFrame.numberOfChannels}`;
         }
         if (aFrame.sampleRate != this.contextFrequency) {
-            throw 'Error sampling frequency received does NOT match local audio rendered, needs more work :-): sampleFrequency: ' + this.sampleFrequency + ", contextSampleFrequency: " + this.contextSampleFrequency;
+            throw 'Error sampling frequency received does NOT match local audio rendered, needs more work :-): sampleFrequency: ' + aFrame.sampleRate + ", contextSampleFrequency: " + this.contextFrequency;
         }
 
         const samplesToAdd = aFrame.numberOfFrames;
